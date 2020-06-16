@@ -114,3 +114,4 @@ while runner=='Y' or runner=='y':
 	        outputwriter.writerow([i,nd[i][0],nd[i][1],jr[i][0],jr[i][1],jl[i][0],jl[i][1],njr[i],njl[i]])
 
 	runner=input("Run Again?: ")
+ 

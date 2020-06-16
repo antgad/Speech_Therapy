@@ -38,7 +38,7 @@ class VideoRecorder():
             if (ret==True):
 
                     self.video_out.write(video_frame)
-                    print (str(counter) + " " + str(self.frame_counts) + " frames written " + str(timer_current))
+                    #print (str(counter) + " " + str(self.frame_counts) + " frames written " + str(timer_current))
                     self.frame_counts += 1
                     counter += 1
                     timer_current = time.time() - timer_start
@@ -65,7 +65,6 @@ class VideoRecorder():
 
         else: 
             pass
-
 
     # Launches the video recording function using a thread          
     def start(self):
@@ -191,7 +190,7 @@ def stop_AVrecording(filename):
 
 #    Merging audio and video signal
 
-    if abs(recorded_fps - 6) >= 0.01:    # If the fps rate was higher/lower than expected, re-encode it to the expected
+    if abs(recorded_fps - 24) >= 0.01:    # If the fps rate was higher/lower than expected, re-encode it to the expected
 
         print( "Re-encoding")
         cmd = "ffmpeg -r " + str(recorded_fps) + " -i temp_video.avi -pix_fmt yuv420p -r 6 temp_video2.avi"
@@ -226,14 +225,30 @@ def file_manager(filename):
     if os.path.exists(str(local_path) + "/temp_video2.avi"):
         os.remove(str(local_path) + "/temp_video2.avi")
 
+
     if os.path.exists(str(local_path) + "/" + filename + ".avi"):
         os.remove(str(local_path) + "/" + filename + ".avi")
-print("STart")
-start_AVrecording("abc")
-print("run\npress escape to end")
+
+    if os.path.exists(str(local_path) + "/" + filename + ".wav"):
+        os.remove(str(local_path) + "/" + filename + ".wav")
+            
+
+
+def ctrl(filename,length):
+    file_manager(filename)
+    start_AVrecording(filename)
+    time.sleep(length)
+    stop_AVrecording(filename)
+    local_path = os.getcwd()
+    os.rename(str(local_path) + "/temp_audio.wav",str(local_path) + "/"+filename+".wav")
+    os.remove(str(local_path) + "/temp_video.avi")
+    os.remove(str(local_path) + "/temp_video2.avi")
+    return video_thread.frame_counts
+
+
+#print("run\npress escape to end")
 #i=0;
 #for i in range(1000):
 #    print("ad")
-time.sleep(30)
-stop_AVrecording("abc")
-print("end")
+
+#print("end")
