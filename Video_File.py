@@ -32,7 +32,7 @@ def video_analysis(path,file):
 	path="D://mpstme//SEM 7//PROJECT//"
 	#file="asdfghj"
 	file=file.split('.')[0]
-	vs=cv2.VideoCapture((path+file+".avi"))
+	vs=cv2.VideoCapture((path+file+".avi"),cv2.CAP_FFMPEG)
 	fc=int(vs.get(cv2.CAP_PROP_FRAME_COUNT))
 	jr=[]
 	jl=[]
@@ -124,7 +124,7 @@ def video_analysis(path,file):
 	plt.boxplot(data)
 
 	
-	plt.savefig("\\static\\images\\"+file+'_bplt.png')
+	plt.savefig(file+'_bplt.png')#r"\\static\\images\\"+
 	#plt.show()
 	print("writing csv")
 	with open((file+".csv"), 'w', newline='') as csvfile:

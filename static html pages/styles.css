@@ -1,0 +1,76 @@
+.top{
+margin-top: 20px;
+padding-bottom: 20px;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: #254F6E; 
+font-family: Broadway;
+color: #707070;
+}
+
+     .bot{
+        padding-bottom: 20px;
+        border-top-style: solid;
+        border-top-width: 10px;
+        border-top-color: #254F6E; 
+        font-family: Broadway;
+        color: #707070;
+        }
+
+      .bod{
+        padding-top: 20px;
+      }
+
+      .butt {
+        background-color: #254F6E; /* Green */
+        border: none;
+        color: #D9D7D7;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: center;
+        font-size: 20px;
+        margin: 4px 2px;
+        font-family: Segoe UI;
+        display: inline-block;
+        font-style: italic;
+        width: 250px;
+      }
+      table{
+        width: 50%;
+      }
+
+
+.cont{
+ padding-left: 30px;
+ padding-right: 30px;
+ border-color: black;
+ border-style: solid;
+ margin: auto;
+ width: 70%;
+ padding: 10px;
+ color: #707070;
+font-family: Segoe UI;
+font-style: italic;
+ }
+
+ .midtitle{
+padding-top: 10px;
+padding-bottom: 10px;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: #254F6E; 
+font-family: Broadway;
+color: #707070;
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: #254F6E; 
+}
+
+tr.clickableRow 
+{ cursor: pointer; } 
+
+th, td{
+ color: #707070;
+font-family: Segoe UI;
+font-style: italic;  
+}

@@ -13,9 +13,11 @@ import xlsxwriter
 from scipy.io import wavfile #for audio processing
 
 fname = ''
+fname2 = ''
 outname = ''
 def setname(file_name):
-	global fname, outname
+	global fname, outname,fname2
+	fname2=file_name
 	fname=file_name+".wav"
 	outname=file_name+"_spect"
 	print(fname)
@@ -155,7 +157,7 @@ def plotstft(audiopath, binsize=2**10, plotpath=True, colormap="jet"):
 	x1,x2,y1,y2 = plt.axis()
 	plt.axis((x1,x2,y1,200))
 	if plotpath:
-		plt.savefig(("\\static\\images\\"+file_name+"_spect"), bbox_inches="tight")
+		plt.savefig((fname2+"_spect"), bbox_inches="tight")#"\\static\\images\\"+
 		print("image saved")
 	else:
 		plt.show()

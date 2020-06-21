@@ -15,10 +15,10 @@ class VideoRecorder():
         self.open = True
         self.device_index = 0
         self.fps = 24               # fps should be the minimum constant rate at which the camera can
-        self.fourcc = "MP4V"       # capture images (with no decrease in speed over time; testing is required)
+        self.fourcc = "XVID"       # capture images (with no decrease in speed over time; testing is required)
         self.frameSize = (640,480) # video formats and sizes also depend and vary according to the camera used
         self.video_filename = "temp_video.avi"
-        self.video_cap = cv2.VideoCapture(self.device_index)
+        self.video_cap = cv2.VideoCapture(self.device_index,cv2.CAP_DSHOW)
         self.video_writer = cv2.VideoWriter_fourcc(*self.fourcc)
         self.video_out = cv2.VideoWriter(self.video_filename, self.video_writer, self.fps, self.frameSize)
         self.frame_counts = 1
@@ -55,6 +55,7 @@ class VideoRecorder():
 
     # Finishes the video recording therefore the thread too
     def stop(self):
+        print("vc.stop")
 
         if self.open==True:
 
@@ -122,7 +123,7 @@ class AudioRecorder():
             waveFile.setframerate(self.rate)
             waveFile.writeframes(b''.join(self.audio_frames))
             waveFile.close()
-
+        print("\n\n\n\naudio stopped\n\n\n\n")
         pass
 
     # Launches the audio recording function using a thread
@@ -135,6 +136,7 @@ class AudioRecorder():
 
 
 def start_AVrecording(filename):
+    print(threading.enumerate())
 
     global video_thread
     global audio_thread
@@ -173,18 +175,35 @@ def start_audio_recording(filename):
 
 
 def stop_AVrecording(filename):
-    if True:#keyboard.is_pressed('esc'): 
-        audio_thread.stop() 
+    if True:#keyboard.is_pressed('esc'):
+        print(threading.enumerate())
+        initialthread=threading.active_count()
+        print("stopping av recording") 
+        print(threading.active_count())
+        print("stopping a recording") 
+        if audio_thread.open!=True:
+            initialthread=initialthread-1
+        else:
+            audio_thread.stop() 
+        
+
+        print(threading.active_count())
         frame_counts = video_thread.frame_counts
         elapsed_time = time.time() - video_thread.start_time
         recorded_fps = frame_counts / elapsed_time
         print( "total frames " + str(frame_counts))
         print( "elapsed time " + str(elapsed_time))
         print( "recorded fps " + str(recorded_fps))
+        print("stopping v recording") 
         video_thread.stop() 
+        print("vc stopped")
+        print(threading.active_count())
+        finalthread=threading.active_count()
+        chthr=initialthread-finalthread
 
         # Makes sure the threads have finished
-        while threading.active_count() > 1:
+        while chthr!=2:#threading.active_count() > 1:
+            print("sleeping")
             time.sleep(1)
 
 

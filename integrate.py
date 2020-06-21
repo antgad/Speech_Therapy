@@ -10,15 +10,18 @@ print("importing noise_spect")
 import noise_spect
 print("importing mfccc_runer")
 #import mfcc_runner
+import numpy as np
 
 
 def controller(f_name,r_len):
+	print("entered integrate")
 	ch=1#int(input("Select one of the following:\n1. Camera\n2. Preloaded file\n"))
 	file_name=""
 	path=os.getcwd()+"\\"
 	if ch == 1:
 		file_name=f_name#input("Enter File Name to be saved: ")
 		length=r_len#int(input("Enter Recording Length: "))
+		print("\n\ncaptureing video\n\n")
 		fc=AV2.ctrl(file_name,length)
 	#elif ch==2:
 	#	file_name=input("Enter File Name: ")
@@ -26,9 +29,12 @@ def controller(f_name,r_len):
 	#	if ch==2:
 	#		path=input("Enter Path: ")
 	#	AV_Split.split_av(path,file_name)
+	print("\n\nvideo anallysis\n\n")
 	Video_File.video_analysis(path,file_name)
+	print("\n\naudio analysis\n\n")
 	ims1=noise_spect.setname(file_name)
 	#mfcc=mfcc_runner.mfcc_run(file_name)
+	print("\n\ncalculating 92iau\n\n")
 	ims2=noise_spect.setname("92-iau")
 	ctr=0
 	if(np.shape(ims1)[0]>np.shape(ims2)[0]):
